@@ -66,10 +66,11 @@ h1 {
 
 .quote {
     max-width: 600px;
-    margin: 1.5rem auto 0;
-    padding: 1rem 1.5rem;
+    margin: 1rem auto 0.25rem;
+    padding: 0.75rem 1.5rem;
     border-left: 4px solid var(--primary);
-    background: #f8f9fa;
+    border-right: 4px solid var(--primary);
+    background: #f0f4f8;
     border-radius: 4px;
 }
 

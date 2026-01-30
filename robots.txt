@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rwegener.github.io/profilephotogenerator/sitemap.xml
+Sitemap: https://rwegener2.github.io/profilephotogenerator/sitemap.xml
