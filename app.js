@@ -349,7 +349,7 @@ class PhotoEditor {
             
             // Add stroke for visibility
             this.ctx.strokeStyle = stopIceColor === '#ffffff' ? '#000000' : '#ffffff';
-            this.ctx.lineWidth = 1.5;
+            this.ctx.lineWidth = 3.5;
             this.ctx.lineCap = 'round';
             this.ctx.lineJoin = 'round';
             
