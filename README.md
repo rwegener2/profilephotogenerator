@@ -1,4 +1,4 @@
-# Photo Text Overlay
+# Immigrants Make America Great Profile Photo Generator
 
 A simple, secure, and modern web application for adding a "Immigrants Make America Great" banner to a social media profile picture. All image processing happens entirely in the browser - no server uploads required.
 
