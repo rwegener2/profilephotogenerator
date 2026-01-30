@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rwegener.github.io/profilephotogenerator/sitemap.xml
