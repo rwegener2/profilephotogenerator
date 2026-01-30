@@ -456,8 +456,8 @@ class PhotoEditor {
         this.fontSizeValue.textContent = '40px';
         this.textColor.value = '#ffffff';
         this.ringColor.value = '#2547A9';
-        this.ringOpacity.value = 85;
-        this.ringOpacityValue.textContent = '85%';
+        this.ringOpacity.value = 94;
+        this.ringOpacityValue.textContent = '94%';
         this.overlayMode.checked = false;
         this.stopIceColor.value = '#ffffff';
         this.stopIceFontSize.value = 24;
