@@ -184,11 +184,11 @@ class PhotoEditor {
             section.classList.add('collapsed');
         });
         
-        // Set initial STOP ICE font size to 50% of main text size
+        // Set initial STOP ICE font size to 65% of main text size
         const baseFontSize = ringWidth * 0.8; // Main text base size
         const fontSizeMultiplier = parseInt(this.fontSize.value) / 40;
         const mainFontSize = baseFontSize * fontSizeMultiplier;
-        const initialStopIceSize = Math.round(mainFontSize * 0.5);
+        const initialStopIceSize = Math.round(mainFontSize * 0.65);
         
         // Dynamically set slider range: min at 50%, max at 250% of default
         const minSize = Math.max(10, Math.round(initialStopIceSize * 0.5));
@@ -349,7 +349,7 @@ class PhotoEditor {
             
             // Add stroke for visibility
             this.ctx.strokeStyle = stopIceColor === '#ffffff' ? '#000000' : '#ffffff';
-            this.ctx.lineWidth = 1;
+            this.ctx.lineWidth = 1.5;
             this.ctx.lineCap = 'round';
             this.ctx.lineJoin = 'round';
             
