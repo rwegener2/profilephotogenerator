@@ -150,11 +150,31 @@ class PhotoEditor {
         reader.onload = (e) => {
             const img = new Image();
             img.onload = () => {
-                // Security: Check dimensions
+                // Auto-scale oversized images down to max dimensions
                 if (img.width > this.maxDimension || img.height > this.maxDimension) {
-                    this.showUploadError(`Image dimensions must be less than ${this.maxDimension}x${this.maxDimension}px.`);
+                    const scale = this.maxDimension / Math.max(img.width, img.height);
+                    const targetWidth = Math.round(img.width * scale);
+                    const targetHeight = Math.round(img.height * scale);
+                    const resizeCanvas = document.createElement('canvas');
+                    resizeCanvas.width = targetWidth;
+                    resizeCanvas.height = targetHeight;
+                    const resizeCtx = resizeCanvas.getContext('2d');
+
+                    if (!resizeCtx) {
+                        this.showUploadError('Failed to resize image. Please try another file.');
+                        return;
+                    }
+
+                    resizeCtx.drawImage(img, 0, 0, targetWidth, targetHeight);
+                    const resizedImage = new Image();
+                    resizedImage.onload = () => this.loadImage(resizedImage);
+                    resizedImage.onerror = () => {
+                        this.showUploadError('Failed to resize image. Please try another file.');
+                    };
+                    resizedImage.src = resizeCanvas.toDataURL('image/png');
                     return;
                 }
+
                 this.loadImage(img);
             };
             img.onerror = () => {
