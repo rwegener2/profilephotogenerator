@@ -34,6 +34,7 @@ class PhotoEditor {
         this.stopIceCenter = document.getElementById('stopIceCenter');
         this.stopIceEnabled = document.getElementById('stopIceEnabled');
         this.stopIceControls = document.getElementById('stopIceControls');
+        this.pg13Mode = document.getElementById('pg13Mode');
         this.downloadBtn = document.getElementById('downloadBtn');
         this.resetBtn = document.getElementById('resetBtn');
     }
@@ -83,6 +84,7 @@ class PhotoEditor {
             this.toggleStopIceControls();
             this.updateCanvas();
         });
+        this.pg13Mode.addEventListener('change', () => this.updateCanvas());
         
         // Buttons
         this.downloadBtn.addEventListener('click', () => this.downloadImage());
@@ -329,6 +331,7 @@ class PhotoEditor {
 
         if (this.stopIceEnabled.checked) {
             // Draw STOP ICE text
+            const stopIceText = this.pg13Mode.checked ? 'FUCK ICE' : 'STOP ICE';
             const stopIceColor = this.stopIceColor.value;
             const stopIcePositionDegrees = parseInt(this.stopIcePosition.value);
             const stopIceAngle = (stopIcePositionDegrees - 90) * Math.PI / 180; // Convert to radians
@@ -358,12 +361,12 @@ class PhotoEditor {
                 this.ctx.save();
                 this.ctx.translate(center, center);
                 this.ctx.rotate(stopIceAngle);
-                this.ctx.strokeText('STOP ICE', 0, 0);
-                this.ctx.fillText('STOP ICE', 0, 0);
+                this.ctx.strokeText(stopIceText, 0, 0);
+                this.ctx.fillText(stopIceText, 0, 0);
                 this.ctx.restore();
             } else {
                 // Draw curved STOP ICE text along edge
-                this.drawCurvedText('STOP ICE', center, center, stopIceRadius, stopIceAngle, stopIceFontSize, true);
+                this.drawCurvedText(stopIceText, center, center, stopIceRadius, stopIceAngle, stopIceFontSize, true);
             }
             this.ctx.restore();
         }
@@ -466,6 +469,7 @@ class PhotoEditor {
         this.stopIcePositionValue.textContent = '270°';
         this.stopIceCenter.checked = false;
         this.stopIceEnabled.checked = true;
+        this.pg13Mode.checked = false;
         this.toggleStopIceControls();
         
         // Clear canvas
