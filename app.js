@@ -35,6 +35,7 @@ class PhotoEditor {
         this.stopIceEnabled = document.getElementById('stopIceEnabled');
         this.stopIceControls = document.getElementById('stopIceControls');
         this.pg13Mode = document.getElementById('pg13Mode');
+        this.uploadError = document.getElementById('uploadError');
         this.downloadBtn = document.getElementById('downloadBtn');
         this.resetBtn = document.getElementById('resetBtn');
     }
@@ -130,16 +131,17 @@ class PhotoEditor {
     }
 
     processFile(file) {
+        this.clearUploadError();
         // Security: Validate file type
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic', 'image/heif'];
         if (!validTypes.includes(file.type)) {
-            alert('Please upload a valid image file (PNG, JPG, HEIC, or HEIF)');
+            this.showUploadError('Please upload a valid image file (PNG, JPG, HEIC, or HEIF).');
             return;
         }
 
         // Security: Validate file size
         if (file.size > this.maxFileSize) {
-            alert('File size must be less than 10MB');
+            this.showUploadError('File size must be less than 10MB.');
             return;
         }
 
@@ -150,24 +152,25 @@ class PhotoEditor {
             img.onload = () => {
                 // Security: Check dimensions
                 if (img.width > this.maxDimension || img.height > this.maxDimension) {
-                    alert(`Image dimensions must be less than ${this.maxDimension}x${this.maxDimension}px`);
+                    this.showUploadError(`Image dimensions must be less than ${this.maxDimension}x${this.maxDimension}px.`);
                     return;
                 }
                 this.loadImage(img);
             };
             img.onerror = () => {
-                alert('Failed to load image. Please try another file.');
+                this.showUploadError('Failed to load image. Please try another file.');
             };
             img.src = e.target.result;
         };
         reader.onerror = () => {
-            alert('Failed to read file. Please try again.');
+            this.showUploadError('Failed to read file. Please try again.');
         };
         reader.readAsDataURL(file);
     }
 
     loadImage(img) {
         this.image = img;
+        this.clearUploadError();
         
         // Set canvas to square based on the larger dimension + ring space
         const maxDim = Math.max(img.width, img.height);
@@ -486,6 +489,19 @@ class PhotoEditor {
         } else {
             this.stopIceControls.classList.add('is-hidden');
         }
+    }
+
+    showUploadError(message) {
+        if (!this.uploadError) return;
+        this.uploadError.textContent = message;
+        this.uploadError.classList.remove('is-hidden');
+        this.uploadError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    clearUploadError() {
+        if (!this.uploadError) return;
+        this.uploadError.textContent = '';
+        this.uploadError.classList.add('is-hidden');
     }
 }
 
