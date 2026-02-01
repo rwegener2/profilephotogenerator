@@ -303,7 +303,7 @@ class PhotoEditor {
 
             // Add stroke for better visibility
             this.ctx.strokeStyle = textColor === '#ffffff' ? '#000000' : '#ffffff';
-            this.ctx.lineWidth = fontSize / 20;
+            this.ctx.lineWidth = Math.max(2, fontSize / 20);
             this.ctx.lineCap = 'round';
             this.ctx.lineJoin = 'round';
 
@@ -352,7 +352,7 @@ class PhotoEditor {
             
             // Add stroke for visibility
             this.ctx.strokeStyle = stopIceColor === '#ffffff' ? '#000000' : '#ffffff';
-            this.ctx.lineWidth = stopIceFontSize / 6;
+            this.ctx.lineWidth = Math.max(2, stopIceFontSize / 6);
             this.ctx.lineCap = 'round';
             this.ctx.lineJoin = 'round';
             
