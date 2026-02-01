@@ -131,9 +131,9 @@ class PhotoEditor {
 
     processFile(file) {
         // Security: Validate file type
-        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic'];
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic', 'image/heif'];
         if (!validTypes.includes(file.type)) {
-            alert('Please upload a valid image file (PNG, JPG, or HEIC)');
+            alert('Please upload a valid image file (PNG, JPG, HEIC, or HEIF)');
             return;
         }
 
